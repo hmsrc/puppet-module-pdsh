@@ -17,7 +17,7 @@
 #   Boolean that determines if EPEL repo should be managed
 # @param manage_genders
 #   Boolean that determines if genders class should be managed
-# @param package_ensure 
+# @param package_ensure
 #   Packages ensure property
 # @param package_name
 #   Main pdsh package name
@@ -54,7 +54,7 @@ class pdsh (
   Boolean $with_slurm             = false,
   Boolean $support_dsh            = true,
   Boolean $manage_epel            = true,
-  Boolean $manage_genders         = true,
+  Boolean $manage_genders         = false,
   String $package_ensure          = 'present',
   String $package_name            = 'pdsh',
   Optional[String] $rsh_package_name      = undef,
@@ -96,10 +96,10 @@ class pdsh (
     $_slurm_package_ensure = 'absent'
   }
 
-  if $with_genders and $manage_genders {
-    include genders
-    Class['genders'] -> Class['pdsh::install']
-  }
+  # if $with_genders and $manage_genders {
+  #   include genders
+  #   Class['genders'] -> Class['pdsh::install']
+  # }
 
   if $manage_epel {
     include epel
@@ -111,6 +111,8 @@ class pdsh (
 
   Class['pdsh::install']
   ->Class['pdsh::config']
+
+  include ::pdsh::generators
 
   case $groups {
     Array: {
