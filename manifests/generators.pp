@@ -16,6 +16,5 @@ class pdsh::generators (
       endpoint      => $endpoint,
     }
 
-    create_resources(pdsh_puppet_list,$queries,$query_defaults)
+    create_resources(pdsh::puppet_list,$queries,$query_defaults)
 }
-

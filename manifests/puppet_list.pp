@@ -1,5 +1,5 @@
 # generate script from template that queries the puppet database
-define pdsh_puppet_list(String $label,
+define pdsh::puppet_list(String $label,
                         String $puppetdb_host,
                         String $puppetdb_port,
                         String $output_dir,
