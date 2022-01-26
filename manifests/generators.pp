@@ -10,7 +10,7 @@ class pdsh::generators (
     #{label => label, endpoint => endpoint, query=> query}
     #provides the parameters to fill out the queries hash more
     $query_defaults = {
-      puppetdb_host => $puppetdb_host ,
+      puppetdb_host => $puppetdb_host,
       puppetdb_port => $puppetdb_port,
       output_dir    => $output_dir,
       endpoint      => $endpoint,
