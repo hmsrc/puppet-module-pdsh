@@ -90,10 +90,6 @@ class pdsh (
     $_genders_package_ensure = 'absent'
   }
 
-  package {'pdsh-mod-genders':
-    ensure => $_genders_package_ensure
-  }
-
   if $with_slurm {
     $_slurm_package_ensure = $package_ensure
   } else {
