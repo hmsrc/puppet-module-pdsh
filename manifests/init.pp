@@ -54,7 +54,7 @@ class pdsh (
   Boolean $with_slurm             = false,
   Boolean $support_dsh            = true,
   Boolean $manage_epel            = true,
-  Boolean $manage_genders         = true,
+  Boolean $manage_genders         = false,
   String $package_ensure          = 'present',
   String $package_name            = 'pdsh',
   Optional[String] $rsh_package_name      = undef,
@@ -90,16 +90,20 @@ class pdsh (
     $_genders_package_ensure = 'absent'
   }
 
+  package {'pdsh-mod-genders':
+    ensure => $_genders_package_ensure
+  }
+
   if $with_slurm {
     $_slurm_package_ensure = $package_ensure
   } else {
     $_slurm_package_ensure = 'absent'
   }
 
-  if $with_genders and $manage_genders {
-    include genders
-    Class['genders'] -> Class['pdsh::install']
-  }
+  # if $with_genders and $manage_genders {
+  #   include genders
+  #   Class['genders'] -> Class['pdsh::install']
+  # }
 
   if $manage_epel {
     include epel
