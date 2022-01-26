@@ -17,7 +17,7 @@
 #   Boolean that determines if EPEL repo should be managed
 # @param manage_genders
 #   Boolean that determines if genders class should be managed
-# @param package_ensure 
+# @param package_ensure
 #   Packages ensure property
 # @param package_name
 #   Main pdsh package name
@@ -108,9 +108,12 @@ class pdsh (
 
   contain pdsh::install
   contain pdsh::config
+  contain pdsh::generators
 
   Class['pdsh::install']
   ->Class['pdsh::config']
+
+  Class['pdsh::generators']
 
   case $groups {
     Array: {
