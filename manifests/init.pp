@@ -108,12 +108,11 @@ class pdsh (
 
   contain pdsh::install
   contain pdsh::config
-  contain pdsh::generators
 
   Class['pdsh::install']
   ->Class['pdsh::config']
 
-  Class['pdsh::generators']
+  include ::pdsh::generators
 
   case $groups {
     Array: {
